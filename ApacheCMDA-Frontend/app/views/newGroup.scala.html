@@ -1,0 +1,28 @@
+@(groupServiceForm: play.data.Form[metadata.GroupService])
+@import helper._
+
+@scripts = {
+        <script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
+}
+
+@main("New Workflow Service", scripts) {
+        @flash_message()
+        @if(true){
+                <h1 align="center">Create a new group</h1>
+                @form(action = routes.GroupController.createNewGroup(), 'enctype -> "multipart/form-data") {
+                        @inputText(
+                                groupServiceForm("name"),
+                                '_label -> "Name * (Please DO NOT contain spaces)"
+                        )
+                        @inputText(
+                                groupServiceForm("isPublic"),
+                                'placeholder -> "public",
+                                '_label -> "public or not"
+                        )
+
+                        <input class="btn" type="submit" value="Create it">
+                        <a href="@routes.Application.workflowHome()" class="btn">Cancel</a>
+                }
+                <br>
+        }
+}

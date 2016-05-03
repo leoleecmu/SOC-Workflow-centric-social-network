@@ -1,0 +1,124 @@
+@(workflowServiceForm: play.data.Form[metadata.WorkflowService], friends: List[Friend], groups: List[Group])
+
+@import helper._
+
+@scripts = {
+        <script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
+}
+
+@main("New Workflow Service", scripts) {
+        @flash_message()
+        @if(true){
+                <h1 align="center">Create a new workflow service</h1>
+                @form(action = routes.WorkflowController.createNewWorkflow(), 'enctype -> "multipart/form-data") {
+                        @inputText(
+                                workflowServiceForm("Name"),
+                                '_label -> "Name * (Please DO NOT contain spaces)"
+                        )
+                        @inputText(
+                                workflowServiceForm("Description"),
+                                '_label -> "Short Description"
+                        )
+
+@*                        @inputFile(*@
+@*                                workflowServiceForm("Image_Preview"),*@
+@*                                '_label -> "Upload Image"*@
+@*                        )*@
+
+                        @inputText(
+                                workflowServiceForm("Url"),
+                                '_label -> "Image url"
+                        )
+
+                        @inputText(
+                                workflowServiceForm("Tasks"),
+                                '_label -> "Task(Name:Description)"
+                        )
+
+                        @inputText(
+                                workflowServiceForm("Input"),
+                                '_label -> "Input(Name:Description)"
+                        )
+
+                        @inputText(
+                                workflowServiceForm("Output"),
+                                '_label -> "Output(Name:Description)"
+                        )
+
+                        @inputText(
+                                workflowServiceForm("Contributors"),
+                                '_label -> "ContributorID"
+                        )
+
+                        @inputText(
+                                workflowServiceForm("Tags"),
+                                '_label -> "Tag(Name)"
+                        )
+
+                        @inputText(
+                                workflowServiceForm("Links"),
+                                '_label -> "Link(Source,sink)"
+                        )
+
+                        @inputText(
+                                workflowServiceForm("Instructions"),
+                                '_label -> "Instructions(Name:Description)"
+                        )
+
+                        @inputText(
+                                workflowServiceForm("Datasets"),
+                                '_label -> "Dataset(Name:Content)"
+                        )
+
+                        @inputText(
+                                workflowServiceForm("AttributeWorkflow"),
+                                '_label -> "Attribute workflow(Name)"
+                        )
+
+                        <br>
+                        <h3>There shows all groups:</h3>
+                        @for(group <- groups) {
+                            <div class="list-group">
+                                <h4 class="list-group-item-heading">ID: @group.groupId , Title:@group.getTitle()</h4>
+                            </div>
+                        }
+
+                        <h3>There shows all friends:</h3>
+                        @for(friend <- friends){
+                            <div class="list-group">
+                                <h4 class="list-group-item-heading">ID: @friend.getID , Name:@friend.getName</h4>
+                            </div>
+                        }
+
+
+                        @inputText(
+                                workflowServiceForm("ViewUserID"),
+                                '_label -> "Access View UserID"
+                        )
+
+                        @inputText(
+                                workflowServiceForm("EditUserID"),
+                                '_label -> "Access Edit UserID"
+                        )
+
+                        @inputText(
+                                workflowServiceForm("ViewGroupID"),
+                                '_label -> "Access View GroupID"
+                        )
+
+                        @inputText(
+                                workflowServiceForm("EditGroupID"),
+                                '_label -> "Access Edit GroupID"
+                        )
+
+                        <input class="btn" type="submit" value="Create it">
+                        <a href="@routes.Application.workflowHome()" class="btn">Cancel</a>
+                }
+
+                <br>
+
+                @form(routes.WorkflowController.downloadWorkflowService(), 'class -> "form-horizontal", 'role -> "form") {
+                        <button type="submit" name="action" value="download">Download</button>
+                }
+        }
+}

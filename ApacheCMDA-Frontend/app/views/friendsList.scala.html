@@ -1,0 +1,99 @@
+@(message: String, posts: List[Post])
+
+@main("Friends") {
+
+    <h1>View all friends</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                @for(post <- posts){
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="media">
+                                        <div class="media-right">
+                                            <a href="#">
+                                                <img src="@post.getImage" alt="" width="100" height="100">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">@post.getTextHead</h4>
+                                            @post.getText
+                                        </div>
+                                    </div>
+                                </div><!--/col-->
+                            </div><!--/row-->
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <button type="button" class="btn btn-default btn-lg">
+                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Follow
+                                    </button>
+                                </div><!--/col-->
+                                <div class="col-xs-12 col-sm-6">
+                                    <button type="button" class="btn btn-default btn-lg">
+                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
+                                    </button>
+                                </div><!--/col-->
+                            </div><!--/row-->
+
+
+                            <div class="row">
+                                @if(post.getTags!=null){
+                                    @for(tag <- post.getTags) {
+                                        <span class="label label-info">@tag</span>
+                                    }
+                                }
+                            <span class="label label-primary">Primary</span>
+                            <span class="label label-success">Success</span>
+                            <span class="label label-info">Info</span>
+                            <span class="label label-warning">Warning</span>
+                            <span class="label label-danger">Danger</span>
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"/>
+                            </div><!--/row-->
+
+                        </div><!--/panel-body-->
+                    </div><!--/panel-->
+                }
+
+
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item active">
+                                Friends
+                            </a>
+                            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                            <a href="#" class="list-group-item">Morbi leo risus</a>
+                            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                            <a href="#" class="list-group-item">Vestibulum at eros</a>
+                        </div>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item active">
+                                Followers
+                            </a>
+                            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                            <a href="#" class="list-group-item">Morbi leo risus</a>
+                            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                            <a href="#" class="list-group-item">Vestibulum at eros</a>
+                        </div>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item active">
+                                Families
+                            </a>
+                            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                            <a href="#" class="list-group-item">Morbi leo risus</a>
+                            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                            <a href="#" class="list-group-item">Vestibulum at eros</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+}

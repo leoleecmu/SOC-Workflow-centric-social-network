@@ -1,0 +1,104 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /home                                                controllers.ClimateServiceController.home(email ?= null, vfile ?= null, dataset ?= null)
+GET 		/													 controllers.ClimateServiceController.home(email ?= null, vfile ?= null, dataset ?= null)
+
+
+
+
+
+GET			/login 												 controllers.Application.login()
+POST		/login											 	 controllers.Application.authenticate()
+
+GET			/createNewUser										 controllers.Application.createNewUser()
+GET			/signup										 		 controllers.Application.signup()
+GET			/createSuccess										 controllers.Application.createSuccess()
+
+GET			/workflowHome										 controllers.Application.workflowHome()
+GET			/workflowHome/newWorkflow						     controllers.WorkflowController.newWorkflow()
+POST		/workflowHome/createNewWorkflow						 controllers.WorkflowController.createNewWorkflow()
+
+GET         /workflowHome/viewAllWorkflows                       controllers.WorkflowController.viewAllWorkflows()
+GET			/workflowHome/oneWorkflow						     controllers.WorkflowController.oneWorkflowService(id ?= null)
+
+POST		/workflowHome/download/workflowServices				 controllers.WorkflowController.downloadWorkflowService()
+
+GET         /workflowHome/editWorkflow						     controllers.WorkflowController.editWorkflow()
+POST        /workflowHome/editWorkflow/addTags					 controllers.WorkflowController.addTags()
+POST        /workflowHome/editWorkflow/addInputs				 controllers.WorkflowController.addInputs()
+POST        /workflowHome/editWorkflow/addOutputs				 controllers.WorkflowController.addOutputs()
+
+POST        /workflowHome/editWorkflow/addTasks				     controllers.WorkflowController.addTasks()
+POST        /workflowHome/editWorkflow/addInstructions		     controllers.WorkflowController.addInstructions()
+POST        /workflowHome/editWorkflow/addDatasets				 controllers.WorkflowController.addDatasets()
+POST        /workflowHome/editWorkflow/addLinks				     controllers.WorkflowController.addLinks()
+POST        /workflowHome/editWorkflow/addAttributes		     controllers.WorkflowController.addAttributes()
+POST        /workflowHome/editWorkflow/addPosts		             controllers.WorkflowController.addPosts()
+
+GET         /workflowHome/forum                                  controllers.ForumController.startDiscuss(wfname?=null)
+GET         /workflowHome/single2                                controllers.ForumController.toSingle2(id : Long)
+GET			/createNewReply										 controllers.ForumController.createNewReply()
+
+GET         /workflowHome/forum/search                           controllers.ForumController.search(String)
+
+GET         /workflowHome/userFriends                            controllers.RelationshipController.getFriendsList()
+GET         /workflowHome/userGroups                             controllers.RelationshipController.getGroup()
+
+GET			/workflowHome/newGroup 						         controllers.GroupController.newGroup()
+POST		/workflowHome/createNewGroups  					     controllers.GroupController.createNewGroup()
+GET			/workflowHome/addUserToGroup 						 controllers.GroupController.addUserToGroup(String)
+POST		/workflowHome/addUserToGroupSubmit  			     controllers.GroupController.addUserToGroupSubmit(String)
+GET			/workflowHome/deleteUserFromGroup                    controllers.GroupController.deleteUserFromGroup(id ?= null, name ?= null)
+
+
+GET			/workflowHome/editUser 								 controllers.UserController.showUser(name ?= null, id: Int)
+POST		/workflowHome/editUser								 controllers.UserController.showUser(name ?= null,id: Int)
+
+GET			/workflowHome/group 							     controllers.GroupController.showGroups()
+GET			/workflowHome/deletegroup 							 controllers.GroupController.deleteGroup(String)
+GET			/workflowHome/allusers 							     controllers.UserController.showAllUser()
+GET			/workflowHome/addFriend 							 controllers.FriendController.addFriend(String)
+GET			/workflowHome/acceptFriend 							 controllers.FriendController.acceptFriend(String)
+GET			/workflowHome/deleteFriend 							 controllers.FriendController.deleteFriend(String)
+GET			/workflowHome/addSubscribe 							 controllers.SubscribeController.addSubscribe(String)
+GET			/workflowHome/deleteSubscribe						 controllers.SubscribeController.deleteSubscribe(String)
+
+
+
+
+# BugReporting
+GET         /bugs                                                controllers.BugReportController.reports()
+GET         /newReport                                           controllers.BugReportController.newReport()
+GET         /bug/list                                            controllers.BugReportController.list()
+POST        /delete/report                                       controllers.BugReportController.deleteReport()
+POST        /solve/report                                        controllers.BugReportController.solveReport()
+
+# About Us
+GET         /aboutus                                             controllers.AboutusController.aboutUs()
+GET         /aboutProject                                        controllers.AboutusController.aboutProject()
+
+# Climate Model
+GET			/climate											controllers.ClimateServiceController.home(email ?= null, vfile ?= null, dataset ?= null)
+GET			/climate/tutorial									controllers.ClimateServiceController.tutorial()
+GET			/climate/climateServices							controllers.ClimateServiceController.climateServices()
+GET			/climate/mostRecentlyAddedClimateServices			controllers.ClimateServiceController.mostRecentlyAddedClimateServices()
+GET			/climate/mostRecentlyUsedClimateServices			controllers.ClimateServiceController.mostRecentlyUsedClimateServices()
+GET			/climate/mostPopularClimateServices					controllers.ClimateServiceController.mostPopularClimateServices()
+
+POST		/climate/new/climateServices    					controllers.ClimateServiceController.newClimateService()
+
+POST    	/climate/delete/climateServices   					controllers.ClimateServiceController.deleteClimateService()
+POST		/climate/download/climateServices					controllers.ClimateServiceController.downloadClimateService()
+POST		/climate/edit/climateServices						controllers.ClimateServiceController.editClimateService()
+GET			/climate/new/climateServices						controllers.ClimateServiceController.addClimateServices()
+GET			/climate/oneService									controllers.ClimateServiceController.oneService(url ?= null)
+#Keyword search
+GET 		/climate/datasets									controllers.DatasetController.datasetList()
+GET			/climate/searchDataSet 					 			controllers.DatasetController.searchDataset()
+GET 		/climate/getSearchResult				 			controllers.DatasetController.getSearchResult()
+
+#Map static resources from the /public folder to the /assets URL path
+GET     	/assets/*file               						controllers.Assets.at(path="/public", file)

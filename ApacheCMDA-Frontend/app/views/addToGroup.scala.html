@@ -1,0 +1,24 @@
+@(groupServiceForm: play.data.Form[metadata.GroupService], groups : List[String], userID:String)
+@import helper._
+
+@scripts = {
+        <script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
+}
+
+@main("New Workflow Service", scripts) {
+        @flash_message()
+        @if(true){
+                <h1 align="center">Add To a Group</h1>
+                @form(action = routes.GroupController.addUserToGroupSubmit(userID), 'enctype -> "multipart/form-data") {
+                        @select(
+                                groupServiceForm("name"),
+                                options(groups),
+                                '_label -> "Group Name", '_default -> "-- Select group --"
+                        )
+
+                        <input class="btn" type="submit" value="Create it">
+                        <a href="@routes.Application.workflowHome()" class="btn">Cancel</a>
+                }
+                <br>
+        }
+}

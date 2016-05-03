@@ -1,0 +1,63 @@
+@(users : List[User])
+
+    @main("Profile") {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12">
+                                        <h2>All USERS</h2>
+                                    </div>
+                                </div><!--/row-->
+                                @for(user <- users) {
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-2">
+                                            <h4>@user.getUserName()</h4>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-2">
+                                            <p><small> Friend </small></p>
+                                            <button type="submit" class="btn btn-success btn-block" id="FriendButton@user.getUserId()">
+                                                <a href='@routes.FriendController.addFriend(user.getUserId())'> Friend </a>
+                                            </button>
+                                        </div><!--/col-->
+
+                                        <div class="col-xs-12 col-sm-2">
+                                            <p><small> Subscribe </small></p>
+                                            <button type="submit" class="btn btn-danger btn-block">
+                                                <a href='@routes.SubscribeController.addSubscribe(user.getUserId())'> Subscribe </a>
+                                            </button>
+                                        </div><!--/col-->
+                                    </div><!--/row-->
+                                    <script type="text/javascript">
+                                            $( "#FriendButton@user.getUserId()" ).click(function() {
+                                                alert( "Add success" );
+                                            });
+                                    </script>
+                                }
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-2">
+                                    <h4>Lee Yo</h4>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-2">
+                                    <p><small> Accept </small></p>
+                                    <button type="submit" class="btn btn-warning btn-block" id="test">
+                                        <a href='@routes.FriendController.acceptFriend("1235"))'> Accept </a>
+                                    </button>
+                                </div><!--/col-->
+                            </div><!--/row-->
+                        </div><!--/panel-body-->
+
+                        <button type="submit" class="btn btn-toolbar btn-block">
+                            <a href='@routes.Application.workflowHome()'> Home </a>
+                        </button>
+                    </div><!--/panel-->
+                </div>
+            </div>
+        </div>
+
+
+    }

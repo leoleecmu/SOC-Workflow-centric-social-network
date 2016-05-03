@@ -1,0 +1,219 @@
+
+@(workflows: List[metadata.WorkflowService], posts: List[models.NewPost])
+
+    @import helper._
+    @main2("forum") {
+        <!-- Start of Search Wrapper -->
+        <div class="search-area-wrapper">
+            <div class="search-area container">
+                <h3 class="search-header">Work Flow Forum</h3>
+                <form id="search-form" class="search-form clearfix" method="get" action="/workflowHome/forum/search" autocomplete="off">
+                    <input class="search-term required" type="text" id="s" name="String" placeholder="Type your search terms here" title="* Please enter a search term!" />
+                    <input class="search-btn" type="submit" value="Search" />
+                    <div id="search-error-container"></div>
+                </form>
+
+            </div>
+        </div>
+        <!-- End of Search Wrapper -->
+
+
+        <!-- Start of Page Container -->
+        <div class="page-container">
+            <div class="container">
+                <div class="row">
+
+                        <!-- start of page content -->
+                    <div class="span8 page-content">
+
+                            <!-- Basic Home Page Template -->
+                        <div class="row separator">
+                            <section class="span4 articles-list">
+                                <h3>WorkFlows</h3>
+                                <ul class="articles">
+                                    @for(workflow <- workflows) {
+                                        <li class="article-entry standard">
+                                            <h4><a href= "@{routes.WorkflowController.oneWorkflowService(workflow.getWfId())}">@workflow.getName</a></h4>
+                                            <span class="article-meta">
+                                            25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">
+                                            Server &amp; Database</a></span>
+                                            <span class="like-count">66</span>
+                                        </li>
+                                    }
+                                </ul>
+                            </section>
+
+
+                            <section class="span4 articles-list">
+                                <h3>Posts</h3>
+                                <ul class="articles">
+                                    @for(post <- posts) {
+                                        <li class="article-entry standard">
+                                            <h4><a href="@{routes.ForumController.toSingle2(post.getId())}">@post.getTitle()</a></h4>
+                                            <p>@post.getContent</p>
+                                        </li>
+                                    }
+                                </ul>
+                            </section>
+                        </div>
+                    </div>
+                        <!-- end of page content -->
+
+
+                        <!-- start of sidebar -->
+                    <aside class="span4 page-sidebar">
+
+                        <section class="widget">
+                            <div class="support-widget">
+                                <h3 class="title">Support</h3>
+                                <p class="intro">
+                                    Need more support? If you did not found an answer, contact us for further help.</p>
+                            </div>
+                        </section>
+
+                        <section class="widget">
+                            <div class="quick-links-widget">
+                                <h3 class="title">Quick Links</h3>
+                                <ul id="menu-quick-links" class="menu clearfix">
+                                    <li><a href="index-2.html">Home</a></li>
+                                    <li><a href="articles-list.html">Articles List</a></li>
+                                    <li><a href="faq.html">FAQs</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="@routes.Application.workflowHome()" class="btn">Home</a></li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section class="widget">
+                            <h3 class="title">Tags</h3>
+                            <div class="tagcloud">
+                                <a href="#" class="btn btn-mini">Fantastic</a>
+                                <a href="#" class="btn btn-mini">Economy</a>
+                                <a href="#" class="btn btn-mini">Financial</a>
+                                <a href="#" class="btn btn-mini">colour</a>
+                                <a href="#" class="btn btn-mini">css</a>
+                                <a href="#" class="btn btn-mini">date</a>
+
+                            </div>
+                        </section>
+
+                    </aside>
+                        <!-- end of sidebar -->
+                </div>
+            </div>
+        </div>
+            <!-- End of Page Container -->
+        <a href='@routes.Application.workflowHome()'>
+            <button type="submit" class="btn btn-toolbar btn-block">
+                Home
+            </button>
+        </a>
+            <!-- Start of Footer -->
+        <footer id="footer-wrapper">
+            <div id="footer" class="container">
+                <div class="row">
+
+                    <div class="span3">
+                        <section class="widget">
+                            <h3 class="title">How it works</h3>
+                            <div class="textwidget">
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
+                                <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="span3">
+                        <section class="widget"><h3 class="title">Categories</h3>
+                            <ul>
+
+                                <li><a href="#" title="Lorem ipsum dolor sit amet,">Advanced Techniques</a> </li>
+                                <li><a href="#" title="Lorem ipsum dolor sit amet,">Designing in WordPress</a></li>
+                                <li><a href="#" title="Lorem ipsum dolor sit amet,">Server &amp; Database</a></li>
+                                <li><a href="#" title="Lorem ipsum dolor sit amet, ">Theme Development</a></li>
+                                <li><a href="#" title="Lorem ipsum dolor sit amet,">Website Dev</a></li>
+                                <li><a href="#" title="Lorem ipsum dolor sit amet,">WordPress for Beginners</a></li>
+                                <li><a href="#" title="Lorem ipsum dolor sit amet, ">WordPress Plugins</a></li>
+                            </ul>
+                        </section>
+                    </div>
+
+                    <div class="span3">
+                        <section class="widget">
+                            <h3 class="title">Latest Tweets</h3>
+                            <div id="twitter_update_list">
+                                <ul>
+                                    <li>No Tweets loaded !</li>
+                                </ul>
+                            </div>
+                            <script src="http://twitterjs.googlecode.com/svn/trunk/src/twitter.min.js" type="text/javascript"></script>
+                            <script type="text/javascript" >
+                                    getTwitters("twitter_update_list", {
+                                        id: "960development",
+                                        count: 3,
+                                        enableLinks: true,
+                                        ignoreReplies: true,
+                                        clearContents: true,
+                                        template: "%text% <span>%time%</span>"
+                                    });
+                            </script>
+                        </section>
+                    </div>
+
+                    <div class="span3">
+                        <section class="widget">
+                            <h3 class="title">Flickr Photos</h3>
+                            <div class="flickr-photos" id="basicuse">
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+            </div>
+                <!-- end of #footer -->
+
+                <!-- Footer Bottom -->
+            <div id="footer-bottom-wrapper">
+                <div id="footer-bottom" class="container">
+                    <div class="row">
+                        <div class="span6">
+                            <p class="copyright">
+                                Copyright &copy; 2014.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                            </p>
+                        </div>
+                        <div class="span6">
+                                <!-- Social Navigation -->
+                            <ul class="social-nav clearfix">
+                                <li class="linkedin"><a target="_blank" href="#"></a></li>
+                                <li class="stumble"><a target="_blank" href="#"></a></li>
+                                <li class="google"><a target="_blank" href="#"></a></li>
+                                <li class="deviantart"><a target="_blank" href="#"></a></li>
+                                <li class="flickr"><a target="_blank" href="#"></a></li>
+                                <li class="skype"><a target="_blank" href="skype:#?call"></a></li>
+                                <li class="rss"><a target="_blank" href="#"></a></li>
+                                <li class="twitter"><a target="_blank" href="#"></a></li>
+                                <li class="facebook"><a target="_blank" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!-- End of Footer Bottom -->
+
+        </footer>
+            <!-- End of Footer -->
+
+        <a href="#top" id="scroll-top"></a>
+
+            <!-- script -->
+        <script type='text/javascript' src='js/jquery-1.8.3.min.js'></script>
+        <script type='text/javascript' src='js/jquery.easing.1.3.js'></script>
+        <script type='text/javascript' src='js/prettyphoto/jquery.prettyPhoto.js'></script>
+        <script type='text/javascript' src='js/jflickrfeed.js'></script>
+        <script type='text/javascript' src='js/jquery.liveSearch.js'></script>
+        <script type='text/javascript' src='js/jquery.form.js'></script>
+        <script type='text/javascript' src='js/jquery.validate.min.js'></script>
+        <script type='text/javascript' src='js/custom.js'></script>
+
+        <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+    }
